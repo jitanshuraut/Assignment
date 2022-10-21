@@ -1,0 +1,95 @@
+<html>
+
+<head>
+<title>Assignment-3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<style>
+    .heading{
+        padding: 10px;
+        background-color: rgb(0, 153, 0);
+        color: white;
+        border-radius: 10px;
+        font-family: 'Montserrat', sans-serif;
+    }
+   .main_body{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+   }
+   .left_side{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+   }
+   .style_num{
+    padding: 10px;
+    margin: 10px;
+        background-color: rgb(121, 121, 121);
+        color: white;
+        border-radius: 10px;
+        font-family: 'Montserrat', sans-serif;
+        
+   }
+   .style_num:hover{
+    background-color: rgb(0, 153, 0);
+    cursor: pointer;
+   }
+   .right_side{
+    font-family: 'Montserrat', sans-serif;
+    margin: 10px;
+   }
+</style>
+<body>
+    <div class="heading">
+        <h1>Welcome to my Homepage</h1>
+        <p>Use the menu to select different Stylesheets</p>
+    </div>
+
+    <div class="main_body">
+        <div class="left_side">
+            <div class="style_num">
+                Stylesheet 1
+            </div>
+            <div class="style_num">
+                Stylesheet 2
+            </div>
+            <div class="style_num">
+                Stylesheet 3
+            </div>
+            <div class="style_num">
+                Stylesheet 4
+            </div>
+            <div class="style_num">
+                None
+            </div>
+        </div>
+
+        <div class="right_side">
+            <h1 class="main_body_head">
+                Same Page Different Stylesheets
+            </h1>
+            <p class="main_body_p">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat autem, consequuntur, error,
+                 asperiores non suscipit impedit aperiam eos 
+                sint consectetur est! <u>Eaque maxime</u> ,<u>atque</u>,<u> vero</u> quod aliquid deserunt voluptatibus ipsum?
+            </p>
+
+            <h2 class="main_body_h2">
+                No style
+            </h2>
+            <p class="main_body_p">
+                Lorem ipsum dolor sit amet consectetur adipisicing 
+                elit. Repellat autem, consequuntur, error, asperiores 
+                non suscipit impedit aperiam eos sint consectetur est!
+                 Eaque maxime atque vero quod aliquid deserunt voluptatibus
+                  ipsum?
+            </p>
+
+        </div>
+    </div>
+</body>
+
+</html>
