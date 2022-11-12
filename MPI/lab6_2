@@ -1,0 +1,40 @@
+LXI H,8600H
+	MVI B,0AH
+
+back:            	MOV A,M
+	RAL 
+	JC n
+	JNC p
+
+fi:	MOV A,C
+	STA 8500H
+	MOV A,D
+	STA 8501H
+	MOV A,E
+	STA 8502H
+	HLT
+
+P:                 MVI A,00H
+	CMP M
+	JZ Z
+	INR C
+	INX H
+	DCR B
+	JNZ back
+	JMP fi
+
+Z:	INR E
+	INX H
+	DCR B
+	JNZ back
+	JMP fi
+
+n:                   INR D
+	INX H
+	DCR B
+	JNZ back
+	JMP fi
+
+
+#ORG 8600H
+#DB 9FH,FFH,01H,00H,01H,00H,FFH,34H,02H,D5H
