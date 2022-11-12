@@ -1,0 +1,42 @@
+<html>
+
+<head>
+<title>a-4-2</title>
+</head>
+
+<body>
+    <h1>hello</h1>
+
+    <h2 id="h2_tag"></h2>
+    <!-- <script src="a-4-2.js"></script> -->
+    <script>
+        var a = "hello"
+        var b = "world"
+
+        var c = a + b
+
+        let d=document.getElementById("h2_tag")
+        var q=prompt("enter the weight in pounds")
+      var w=prompt("enter the height in inches")
+
+      var bmi=(q*703)/(w*w)
+
+      if(bmi>=30){
+        d.innerHTML="Your weight is considered to be unhealthy"
+      }
+      else if(bmi>=25){
+        d.innerHTML="You are currently considered to be overweight"
+      }
+      else if(bmi>=18.5){
+        d.innerHTML="Your weight is considered normal and healthy"
+      }
+      else{
+        d.innerHTML="“You are considered underweight"
+      }
+
+
+       
+    </script>
+</body>
+
+</html>
