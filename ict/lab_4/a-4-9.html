@@ -1,24 +1,30 @@
 <html>
 
 <head>
-<title>a-4-2</title>
+<title>a-4-9</title>
 </head>
 
-<body>
+<body id="body">
     <h1>hello</h1>
 
     
 
-    <h2 id="h2_tag"></h2>
+   
     <!-- <script src="a-4-2.js"></script> -->
     <script>
-        var a = "hello"
-        var b = "world"
+        let bo=document.getElementById("body")
 
-        var c = a + b
+        const myTimeout = setTimeout(change, 5000);
 
-        let d=document.getElementById("h2_tag")
-    
+        var r=Math.floor(Math.random()*255)
+        var g=Math.floor(Math.random()*255)
+        var b=Math.floor(Math.random()*255)
+
+        function change() {
+
+            bo.style.backgroundColor=`rgb(${r},${g},${b})`
+            
+        }
      
 
        
