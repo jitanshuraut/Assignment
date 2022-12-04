@@ -1,0 +1,59 @@
+DATA SEGMENT
+    DATA ENDS
+    
+ASSUME CS:CODE, DS:DATA
+
+CODE SEGMENT
+    START:
+    MOV AX, DATA
+    MOV DATA, AX
+    
+    ;Take input into AL register.
+    
+    MOV AH, 01H
+    INT 21H
+    
+    ;Copy the input value to another location.
+    
+    MOV BH, AL
+    
+    ;Take input into AL register.
+    
+    MOV AH, 01H
+    INT 21H
+    
+    ;Copy the input value to another location.
+    
+    MOV BL, AL
+    
+    MOV DH, BH
+    ADD DH, BL
+    MOV AL, DH
+    AAA
+    MOV DH, AL
+    
+    MOV DL, BH
+    SUB DL, BL
+    MOV AL, DL
+    AAS
+    MOV DL, AL
+     
+    MOV AL, DH
+    MOV AH, 00H     
+    DIV DL      ;Q-AL R-AH
+    
+    MOV DL, AL
+    MOV BH, AH
+    OR DL, 30H
+    MOV AH, 02H
+    INT 21H
+    
+    MOV DL, BH
+    OR DL, 30H
+    MOV AH, 02H
+    INT 21H
+    
+    HLT                 
+    
+    END START                
+    CODE ENDS

@@ -1,0 +1,29 @@
+; 10.2.2 Move 10 bytes from 4000:2000 to 4000:3000 using string instr.
+
+DATA SEGMENT
+    DATA ENDS
+
+CODE SEGMENT
+    ASSUME CS:CODE, DS:DATA
+START: MOV AX, DATA
+       MOV DS, AX
+       
+       MOV AX, 4000H   ; Initialise segment base
+       MOV DS, AX
+       
+       MOV AX, 4000H
+       MOV ES, AX
+       
+       MOV SI, 2000H    ; Source Index
+       MOV DI, 3000H    ; Destinaton Index
+       
+       MOV CX, 0AH      ; Counter = 10
+       
+       CLD
+       REP MOVSW        ; Repeat movsw 10 times
+       
+       MOV AH, 4CH
+       INT 21H
+       
+     CODE ENDS
+END START

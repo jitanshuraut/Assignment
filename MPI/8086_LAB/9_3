@@ -1,0 +1,38 @@
+data_here segment
+    data_here ends
+
+code_here segment
+    assume cs:code_here, ds:data_here
+    
+ start: mov ax , data_here
+        mov ds, ax
+        
+        mov ax,00h ; clear ax
+        
+        mov si, 2000h ;inputbuff/* fd here
+        mov al, [si]        ;al has fd means 253    
+       
+        mov dl,64h    ;divsior is 64h
+        div dl   ; remainder in ah and quotient in al
+        mov bl, al ;take quotient to bl
+        
+        mov dl, 0ah
+        mov al,00h
+        mov al, ah
+        mov ah, 00h           ; now the dividend is the remainder from previous
+        div dl        ; ah has the unit place digit
+        mov bh,al   ;bh has the next quotient
+        mov cl, 04h
+        ror bh,cl
+        add ah,bh
+        
+        mov [si+1],ah   ;/*show 53 here
+        mov [si+2],bl       
+                        ;/* show 02 here and tell ans is 253 for fd
+        
+        
+         mov ah, 4ch
+        int 21h
+       code_here ends
+end start
+    
