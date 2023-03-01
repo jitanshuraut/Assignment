@@ -605,3 +605,6 @@ eg:Consider T (n) = 2TDAA Recurrence Relation + n2
 ```
 https://www.javatpoint.com/daa-recursion-tree-method
 ```
+
+## Master Theorem
+<img width="602" alt="image" src="https://user-images.githubusercontent.com/96559286/222040005-16cd8045-d573-4807-8c2e-c669b39d409f.png">
