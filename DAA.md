@@ -144,6 +144,17 @@ The space complexity of BFS can be expressed as O(V), where V is the number of v
 ##  Disadvantages of Breadth First Search:
 The main drawback of BFS is its memory requirement. Since each level of the tree must be saved in order to generate the next level and the amount of memory is proportional to the number of nodes stored the space complexity of BFS is O(bd ), where b is the branching factor(the number of children at each node, the outdegree) and d is the depth. As a result, BFS is severely space-bound in practice so will exhaust the memory available on typical computers in a matter of minutes.
 
+## Enhancements to BFS
+• If BFS(i) sets visited[j] == 1, we know that i and j are connected
+• How do we identify a path from i to j
+• When we mark visited[k] = 1, remember the neighbour from which we marked it
+◦ If exploring edge (j,k) visits k, set parent[k] = j
+
+• BFS can record how long the path is to each vertex
+• Instead of binary array visited[], keep integer array level []
+• level[j] = -1 initially
+• level[j] = p means j is reached in p steps from i
+
 
 # Depth First Search or DFS for a Graph
 Depth-first search is an algorithm for traversing or searching tree or graph data structures. The algorithm starts at the root node (selecting some arbitrary node as the root node in the case of a graph) and explores as far as possible along each branch before backtracking. 
