@@ -128,6 +128,11 @@ int main()
 }
 
 ```
+## Complexity of BFS algorithm
+Time complexity of BFS depends upon the data structure used to represent the graph. The time complexity of BFS algorithm is O(V+E), since in the worst case, BFS algorithm explores every node and edge. In a graph, the number of vertices is O(V), whereas the number of edges is O(E).
+
+The space complexity of BFS can be expressed as O(V), where V is the number of vertices.
+
 ## Advantages of Breadth First Search
 🌟 BFS will never get trapped exploring the useful path forever.
 🌟 If there is a solution, BFS definitely find it out.
@@ -219,6 +224,10 @@ int main()
 // improved by Vishnudev C
 
 ```
+## Complexity of Depth-first search algorithm
+The time complexity of the DFS algorithm is O(V+E), where V is the number of vertices and E is the number of edges in the graph.
+
+The space complexity of the DFS algorithm is O(V)
 
 ## Advantages of Depth First Search:
 Memory requirement is only linear with respect to the search graph. This is in contrast with breadth-first search which requires more space. The reason is that the algorithm only needs to store a stack of nodes on the path from the root to the current node.
