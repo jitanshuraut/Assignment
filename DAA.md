@@ -276,11 +276,140 @@ In computer science and mathematics, DAG stands for "Directed Acyclic Graph".
 A DAG is a directed graph that has no cycles, which means that there is no way to start at any node and follow a sequence of directed edges that will eventually loop back to that node. Instead, the edges in a DAG go in a single direction, forming a tree-like structure. Each edge in a DAG has a direction, indicating that one node is the parent or predecessor, and the other node is the child or successor.
 
 DAGs are commonly used in computer science to represent dependencies between tasks or data. For example, in a software build system, a DAG can be used to represent the dependencies between source code files, so that the build system can determine the correct order in which to compile them. DAGs are also used in data processing pipelines, where each node represents a step in the processing, and the edges indicate the data flow between the steps.
+
 ## Topological Ordering
 Topological sorting for Directed Acyclic Graph (DAG) is a linear ordering of vertices such that for every directed edge u v, vertex u comes before v in the ordering.
 
 Note: Topological Sorting for a graph is not possible if the graph is not a DAG.
 ![Topological-Sorting-1](https://user-images.githubusercontent.com/96559286/236356247-b8327811-eae5-4bd2-ac29-e90a09bb6e14.png)
+
+## Algorithm for Topological Sorting:
+Approach:
+
+Create a stack to store the nodes.
+Initialize visited array of size N to keep the record of visited nodes.
+Run a loop from 0 till N
+if the node is not marked True in visited array
+Call the recursive function for topological sort and perform the following steps.
+Mark the current node as True in the visited array.
+Run a loop on all the nodes which has a directed edge to the current node
+if the node is not marked True in the visited array:
+Recursively call the topological sort function on the node
+Push the current node in the stack.
+Print all the elements in the stack.
+
+```
+// A C++ program to print topological
+// sorting of a DAG
+#include <bits/stdc++.h>
+using namespace std;
+
+// Class to represent a graph
+class Graph {
+	// No. of vertices'
+	int V;
+
+	// Pointer to an array containing adjacency listsList
+	list<int>* adj;
+
+	// A function used by topologicalSort
+	void topologicalSortUtil(int v, bool visited[],
+							stack<int>& Stack);
+
+public:
+	// Constructor
+	Graph(int V);
+
+	// function to add an edge to graph
+	void addEdge(int v, int w);
+
+	// prints a Topological Sort of
+	// the complete graph
+	void topologicalSort();
+};
+
+Graph::Graph(int V)
+{
+	this->V = V;
+	adj = new list<int>[V];
+}
+
+void Graph::addEdge(int v, int w)
+{
+	// Add w to v’s list.
+	adj[v].push_back(w);
+}
+
+// A recursive function used by topologicalSort
+void Graph::topologicalSortUtil(int v, bool visited[],
+								stack<int>& Stack)
+{
+	// Mark the current node as visited.
+	visited[v] = true;
+
+	// Recur for all the vertices
+	// adjacent to this vertex
+	list<int>::iterator i;
+	for (i = adj[v].begin(); i != adj[v].end(); ++i)
+		if (!visited[*i])
+			topologicalSortUtil(*i, visited, Stack);
+
+	// Push current vertex to stack
+	// which stores result
+	Stack.push(v);
+}
+
+// The function to do Topological Sort.
+// It uses recursive topologicalSortUtil()
+void Graph::topologicalSort()
+{
+	stack<int> Stack;
+
+	// Mark all the vertices as not visited
+	bool* visited = new bool[V];
+	for (int i = 0; i < V; i++)
+		visited[i] = false;
+
+	// Call the recursive helper function
+	// to store Topological
+	// Sort starting from all
+	// vertices one by one
+	for (int i = 0; i < V; i++)
+		if (visited[i] == false)
+			topologicalSortUtil(i, visited, Stack);
+
+	// Print contents of stack
+	while (Stack.empty() == false) {
+		cout << Stack.top() << " ";
+		Stack.pop();
+	}
+	
+	delete [] visited;
+}
+
+// Driver Code
+int main()
+{
+	// Create a graph given in the above diagram
+	Graph g(6);
+	g.addEdge(5, 2);
+	g.addEdge(5, 0);
+	g.addEdge(4, 0);
+	g.addEdge(4, 1);
+	g.addEdge(2, 3);
+	g.addEdge(3, 1);
+
+	cout << "Following is a Topological Sort of the given "
+			"graph \n";
+
+	// Function Call
+	g.topologicalSort();
+
+	return 0;
+}
+```
+
+
 
 # Detect Cycle in a Directed Graph
 ## DFS
@@ -879,3 +1008,17 @@ int main()
 	return 0;
 }
 ```
+
+## Complexity
+
+Still O(n2)
+```
+◦ Different types of trees (heaps, red-black trees) allow both of the following in O(log n) time
+◦ Find and delete minimum
+◦ Insert or update a value
+◦ With such a tree
+◦ Finding minimum visit time vertex takes O(log n)
+◦ With adjacency list, updating visit times takes O(log n) each, total O(m) edges
+◦ Overall O(n log n + m log n) = O((n+m) log n)
+```
+
