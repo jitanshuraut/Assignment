@@ -270,6 +270,18 @@ Minimum Spanning Tree for weighted graphs
 Peer to Peer Networks
 ....
 ```
+## DAG
+In computer science and mathematics, DAG stands for "Directed Acyclic Graph". 
+
+A DAG is a directed graph that has no cycles, which means that there is no way to start at any node and follow a sequence of directed edges that will eventually loop back to that node. Instead, the edges in a DAG go in a single direction, forming a tree-like structure. Each edge in a DAG has a direction, indicating that one node is the parent or predecessor, and the other node is the child or successor.
+
+DAGs are commonly used in computer science to represent dependencies between tasks or data. For example, in a software build system, a DAG can be used to represent the dependencies between source code files, so that the build system can determine the correct order in which to compile them. DAGs are also used in data processing pipelines, where each node represents a step in the processing, and the edges indicate the data flow between the steps.
+## Topological Ordering
+Topological sorting for Directed Acyclic Graph (DAG) is a linear ordering of vertices such that for every directed edge u v, vertex u comes before v in the ordering.
+
+Note: Topological Sorting for a graph is not possible if the graph is not a DAG.
+![Topological-Sorting-1](https://user-images.githubusercontent.com/96559286/236356247-b8327811-eae5-4bd2-ac29-e90a09bb6e14.png)
+
 # Detect Cycle in a Directed Graph
 ## DFS
 To find cycle in a directed graph we can use the Depth First Traversal (DFS) technique. It is based on the idea that there is a cycle in a graph only if there is a back edge [i.e., a node points to one of its ancestors] present in the graph.
