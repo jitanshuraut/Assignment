@@ -1382,3 +1382,266 @@ int main()
 }  
 
 ```
+```
+int result[1000] = {0};
+int fact(int n) {
+   if (n >= 0) {
+      result[0] = 1;
+      for (int i = 1; i <= n; ++i) {
+         result[i] = i * result[i - 1];
+      }
+      return result[n];
+   }
+}
+```
+```
+// A memoization solution for Rod cutting problem
+#include <bits/stdc++.h>
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+// A utility function to get the maximum of two integers
+int max(int a, int b) { return (a > b) ? a : b; }
+
+/* Returns the best obtainable price for a rod of length n
+and price[] as prices of different pieces */
+int cutRod(int price[], int index, int n,
+		vector<vector<int> >& dp)
+{
+	// base case
+	if (index == 0) {
+		return n * price[0];
+	}
+	if (dp[index][n] != -1)
+		return dp[index][n];
+	// At any index we have 2 options either
+	// cut the rod of this length or not cut
+	// it
+	int notCut = cutRod(price, index - 1, n,dp);
+	int cut = INT_MIN;
+	int rod_length = index + 1;
+
+	if (rod_length <= n)
+		cut = price[index]
+			+ cutRod(price, index, n - rod_length,dp);
+
+	return dp[index][n]=max(notCut, cut);
+	
+}
+/* Driver program to test above functions */
+int main()
+{
+	int arr[] = { 1, 5, 8, 9, 10, 17, 17, 20 };
+	int size = sizeof(arr) / sizeof(arr[0]);
+	vector<vector<int> > dp(size,
+							vector<int>(size + 1, -1));
+	cout << "Maximum Obtainable Value is "
+		<< cutRod(arr, size - 1, size, dp);
+	getchar();
+	return 0;
+}
+
+// This code is contributed by Sanskar
+```
+```
+/* Dynamic Programming solution to
+find length of the
+longest common substring */
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+/* Returns length of longest
+common substring of X[0..m-1]
+and Y[0..n-1] */
+int LCSubStr(char* X, char* Y, int m, int n)
+{
+	// Create a table to store
+	// lengths of longest
+	// common suffixes of substrings.
+	// Note that LCSuff[i][j] contains
+	// length of longest common suffix
+	// of X[0..i-1] and Y[0..j-1].
+
+	int LCSuff[m + 1][n + 1];
+	int result = 0; // To store length of the
+					// longest common substring
+
+	/* Following steps build LCSuff[m+1][n+1] in
+		bottom up fashion. */
+	for (int i = 0; i <= m; i++)
+	{
+		for (int j = 0; j <= n; j++)
+		{
+			// The first row and first column
+			// entries have no logical meaning,
+			// they are used only for simplicity
+			// of program
+			if (i == 0 || j == 0)
+				LCSuff[i][j] = 0;
+
+			else if (X[i - 1] == Y[j - 1]) {
+				LCSuff[i][j] = LCSuff[i - 1][j - 1] + 1;
+				result = max(result, LCSuff[i][j]);
+			}
+			else
+				LCSuff[i][j] = 0;
+		}
+	}
+	return result;
+}
+
+// Driver code
+int main()
+{
+	char X[] = "OldSite:GeeksforGeeks.org";
+	char Y[] = "NewSite:GeeksQuiz.com";
+
+	int m = strlen(X);
+	int n = strlen(Y);
+
+	cout << "Length of Longest Common Substring is "
+		<< LCSubStr(X, Y, m, n);
+	return 0;
+}
+```
+```
+/* A Top-Down DP implementation of LCS problem */
+#include <bits/stdc++.h>
+using namespace std;
+
+/* Returns length of LCS for X[0..m-1], Y[0..n-1] */
+int lcs(char* X, char* Y, int m, int n,
+		vector<vector<int> >& dp)
+{
+	if (m == 0 || n == 0)
+		return 0;
+	if (X[m - 1] == Y[n - 1])
+		return dp[m][n] = 1 + lcs(X, Y, m - 1, n - 1, dp);
+
+	if (dp[m][n] != -1) {
+		return dp[m][n];
+	}
+	return dp[m][n] = max(lcs(X, Y, m, n - 1, dp),
+						lcs(X, Y, m - 1, n, dp));
+}
+
+/* Driver code */
+int main()
+{
+	char X[] = "AGGTAB";
+	char Y[] = "GXTXAYB";
+
+	int m = strlen(X);
+	int n = strlen(Y);
+	vector<vector<int> > dp(m + 1, vector<int>(n + 1, -1));
+	cout << "Length of LCS is " << lcs(X, Y, m, n, dp);
+
+	return 0;
+}
+```
+```
+// Here is the top-down approach of
+// dynamic programming
+#include <bits/stdc++.h>
+using namespace std;
+
+// Returns the value of maximum profit
+int knapSackRec(int W, int wt[], int val[], int i, int** dp)
+{
+	// base condition
+	if (i < 0)
+		return 0;
+	if (dp[i][W] != -1)
+		return dp[i][W];
+
+	if (wt[i] > W) {
+
+		// Store the value of function call
+		// stack in table before return
+		dp[i][W] = knapSackRec(W, wt, val, i - 1, dp);
+		return dp[i][W];
+	}
+	else {
+		// Store value in a table before return
+		dp[i][W] = max(val[i]
+						+ knapSackRec(W - wt[i], wt, val,
+										i - 1, dp),
+					knapSackRec(W, wt, val, i - 1, dp));
+
+		// Return value of table after storing
+		return dp[i][W];
+	}
+}
+
+int knapSack(int W, int wt[], int val[], int n)
+{
+	// double pointer to declare the
+	// table dynamically
+	int** dp;
+	dp = new int*[n];
+
+	// loop to create the table dynamically
+	for (int i = 0; i < n; i++)
+		dp[i] = new int[W + 1];
+
+	// loop to initially filled the
+	// table with -1
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < W + 1; j++)
+			dp[i][j] = -1;
+	return knapSackRec(W, wt, val, n - 1, dp);
+}
+
+// Driver Code
+int main()
+{
+	int profit[] = { 60, 100, 120 };
+	int weight[] = { 10, 20, 30 };
+	int W = 50;
+	int n = sizeof(profit) / sizeof(profit[0]);
+	cout << knapSack(W, weight, profit, n);
+	return 0;
+}
+```
+```
+#include <bits/stdc++.h>
+using namespace std;
+
+int coinchange(vector<int>& a, int v, int n,
+			vector<vector<int> >& dp)
+{
+	if (v == 0)
+		return dp[n][v] = 1;
+	if (n == 0)
+		return 0;
+	if (dp[n][v] != -1)
+		return dp[n][v];
+	if (a[n - 1] <= v) {
+		// Either Pick this coin or not
+		return dp[n][v] = coinchange(a, v - a[n - 1], n, dp)
+						+ coinchange(a, v, n - 1, dp);
+	}
+	else // We have no option but to leave this coin
+		return dp[n][v] = coinchange(a, v, n - 1, dp);
+}
+int32_t main()
+{
+	int tc = 1;
+	// cin >> tc;
+	while (tc--) {
+		int n, v;
+		n = 3, v = 4;
+		vector<int> a = { 1, 2, 3 };
+		vector<vector<int> > dp(n + 1,
+								vector<int>(v + 1, -1));
+		int res = coinchange(a, v, n, dp);
+		cout << res << endl;
+	}
+}
+// This Code is Contributed by
+// Harshit Agrawal NITT
+```
+
+
